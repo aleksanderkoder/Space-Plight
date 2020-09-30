@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="animate.css">
+    <title>Space Plight</title>
+  </head>
+
+  <body>
+    <div  id="startmenu">
+      <div class="animated pulse infinite" id="logo"></div>
+      <h1 class="animated pulse infinite" id="title">Space Plight</h1>
+      <button id="btnStart">Start game</button> <br>
+      <button id="btnOptions">Options</button> <br>
+      <button class="btnQuit">Quit</button>
+      <p id="makersmark">© Aleksander Johansen 2020</p>
+    </div>
+
+    <h1 id="startTimer" class="animated pulse infinite">Start timer</h1>
+
+    <div id="game">
+      <p id="levelCounter" class="animated fadeInDown">Level: 1</p>
+      <p id="score" class="animated fadeInDown">Score: 0</p>
+      <div id="player" class="animated fadeInLeft"></div>
+    </div>
+
+    <div id="deathscreen" class="animated bounceInDown">
+      <h1 id="txtYouDied">You died !</h1>
+      <h2 id="h2showFinalLevel">Your level</h2>
+      <h2 id="h2showFinalScore">Your score</h2>
+      <button id="btnNewGame">Play again</button> <br>
+      <button id="btnMainMenu">Back to main menu</button> <br>
+      <button class="btnQuit">Quit</button>
+    </div>
+
+    <div id="options"> 
+      <h1>Options</h1>
+      <table>
+        <tr>
+          <td>
+            <p>Master volume</p>
+          </td>
+          <td>
+            <input type="range" min="0,0" max="100" value="50" class="slider" id="MasterVolumeSlider">
+          </td>
+        </tr>
+      </table>
+      <button id="btnOptTilbake">Return to main menu</button>
+    </div>
+
+    <div id="background" class="animated fadeIn"></div>
+    <script src="minjs.js"></script>
+  </body>
+  
+</html>

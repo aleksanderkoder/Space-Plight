@@ -1,0 +1,177 @@
+@font-face {
+    font-family: Pixeled;
+    src: url(Fonts/Minecraft.ttf);
+  }
+
+h1, h2, p {
+    font-family: Pixeled;
+}
+
+#player {
+    width: 50px;
+    height: 50px;
+    background-image: url("Art assets/romskip 2.png");
+    position: absolute;
+    top: 250px;
+    left: 370px;
+}
+
+#options {
+    top: 55px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+
+#options table {
+    margin: auto;
+}
+
+#background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0; 
+    background-image: url("Art assets/space_d.png");
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+body { 
+    user-select: none;
+    overflow: hidden; 
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: black;
+    
+}
+.asteroide {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    animation: rotation 2s infinite linear;
+}
+.skudd {
+    width: 50px;
+    height: 10px;
+    position: absolute;
+    background-image: url("Art assets/shot.gif"); 
+}
+
+#score {
+    color: red;
+    top: 15px;
+    right: 60px;
+    position: absolute;
+    z-index: 9;
+}
+
+#levelCounter {
+    color: red;
+    top: 15px;
+    left: 60px;
+    position: absolute;
+    z-index: 9;
+}
+
+#startmenu {
+    top: 90px;
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+#startTimer {
+    color: red;
+    font-size: 65px;
+    position: absolute;
+    top: 200px;
+    left: 375px;
+    text-align: center;
+    display: none;
+}
+
+#title {
+    color: red;
+}
+
+#game {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+#deathscreen {
+    top: 55px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+
+#logo {
+    background-image: url("Art assets/asteroide 3.png");
+    height: 50px;
+    width: 50px;
+    margin: auto;
+}
+
+#txtYouDied {
+    color: red;
+}
+
+button {
+    height: 50px;
+    width: 200px;
+    font-size: 35;
+    border: 3px dashed grey;
+    background-color: white;
+    margin: 20px;
+    color: grey;
+    font-family: Pixeled;
+    font-size: 20px;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background-color: lightgrey;
+}
+
+#makersmark {
+    position: absolute;
+    color: white;
+    font-size: 10px;
+    bottom: 85px;
+    left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+     
+}
+
+.btnQuit {
+    color: red;
+}
+
+@keyframes rotation {
+    from {
+            transform: rotate(0deg);
+    }
+    to {
+            transform: rotate(359deg);
+    }
+}

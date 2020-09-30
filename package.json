@@ -1,0 +1,26 @@
+{
+  "name": "spaceplight",
+  "version": "1.0.0",
+  "description": "A game about flying through space and avoiding the many hazards that can be found there.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . --out=dist/win SpacePlight --platform=win32 --arch=x64 --icon=images/favicon.ico --asar --overwrite"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "Aleksander Johansen, aleksander.johans@gmail.com",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^9.0.4"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
+}

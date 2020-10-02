@@ -1,7 +1,7 @@
 const app = require('electron').remote; 
 window.$ = window.jQuery = require('./jquery-3.5.1.min.js');
 
-$(document).ready(function() {
+jQuery(function() {
     
     var beepSound = new Audio("Sound effects/Beep.mp3");
     var menuMusic = new Audio("Musikk/space_thickness_01.mp3");
@@ -32,12 +32,13 @@ $(document).ready(function() {
     var skuddListe = [];
     var kanSkyte = true;
     
-    $("#btnStart").click(function(){
+    $("#btnStart").on("click", function(){
         menuMusic.pause();
         menuMusic.currentTime = 0;
         var countSound = new Audio("Sound effects/Countdown trimmed.mp3");
         countSound.volume = masterVolume; 
         countSound.play(); 
+        document.getElementById("background").style.backgroundImage = 'url("Art assets/space_d.png")';
         $("#startmenu").hide();
         $("#startTimer").show();
         $("#startTimer").html("3");
@@ -67,13 +68,13 @@ $(document).ready(function() {
         console.log(masterVolume);
     }
 
-    $("#btnOptTilbake").click(function(){
+    $("#btnOptTilbake").on("click", function(){
         $("#options").hide();
         $("#startmenu").show();
         beepSound.play(); 
     }); 
 
-    $("#btnNewGame").click(function(){
+    $("#btnNewGame").on("click", function(){
         document.getElementById("background").style.backgroundImage = 'url("Art assets/space_d.png")';
         deathMusic.pause();
         deathMusic.currentTime = 0;
@@ -101,11 +102,11 @@ $(document).ready(function() {
         }, 1000);
     }); 
 
-    $(".btnQuit").click(function(){
+    $(".btnQuit").on("click", function(){
         app.getCurrentWindow().close(); 
     }); 
 
-    $("#btnMainMenu").click(function(){
+    $("#btnMainMenu").on("click", function(){
         menuMusic = new Audio("Musikk/space_thickness_01.mp3");
         menuMusic.volume = masterVolume; 
         menuMusic.play();  
@@ -116,7 +117,7 @@ $(document).ready(function() {
         $("#startmenu").show();
     });
 
-    $("#btnOptions").click(function(){
+    $("#btnOptions").on("click", function(){
         $("#startmenu").hide();
         $("#options").show();
         beepSound.play();
@@ -304,88 +305,101 @@ $(document).ready(function() {
             }
 
             // Sjekker kollidering i alle retninger
+            var sjekkKolTicks = 0; 
             function sjekkKollidering(){
-                
-                for(var i = 0; i < asteroideListe.length; i++)
+                sjekkKolTicks++;
+                if(sjekkKolTicks >= 5)
                 {
-                    var currentAsteroide = asteroideListe[i].id;
-                    var elCurrentAsteroide = document.getElementById(currentAsteroide);  
-                    
-                    // Fjerner asteroide hvis den er utenfor venstre vindugrense
-                    if(parseInt($("#" + currentAsteroide).css("left")) < -50)
-                    {
-                        elCurrentAsteroide.remove();
-                        asteroideListe.splice(i,1);  
-                        //console.log("Slettet asteroide fra array.");
-                        return;  
-                    }
-                    // Sjekker kollidering i retning opp
-                    var playerX = parseInt($("#player").css("left"));
-                    var asteroideX = parseInt($("#" + currentAsteroide).css("left"));
+                    console.log("Kjører sjekkKollidering");
+                    sjekkKolTicks = 0; 
                     var playerY = parseInt($("#player").css("top"));
-                    var asteroideY = parseInt($("#" + currentAsteroide).css("top"));
+                    var playerX = parseInt($("#player").css("left"));
                     
-                    if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY == asteroideY + 50 || playerX < asteroideX && playerX > asteroideX - 50 && playerY == asteroideY + 50)
+                    for(var i = 0; i < asteroideListe.length; i++)
                     {
-                        playerDead();
-                        return; 
-                    }
-                    
-                    // Sjekker kollidering i retning ned
-                    playerY = parseInt($("#player").css("bottom"));
-                    asteroideY = parseInt($("#" + currentAsteroide).css("bottom"));
-                    
-                    if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY == asteroideY + 50 || playerX < asteroideX && playerX > asteroideX - 50 && playerY == asteroideY + 50)
-                    { 
-                        playerDead();
-                        return; 
-                    }
-        
-                    // Sjekker kollidering i retning høyre
-                    playerX = parseInt($("#player").css("right"));
-                    asteroideX = parseInt($("#" + currentAsteroide).css("right"));
-                    playerY = parseInt($("#player").css("top"));
-                    asteroideY = parseInt($("#" + currentAsteroide).css("top"));
-                    
-                    if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY >= asteroideY &&  playerY < asteroideY + 50 || asteroideX >= playerX && asteroideX < playerX + 50 && asteroideY >= playerY && asteroideY < playerY + 50) 
-                    { 
-                        playerDead();
-                        return;
-                    }
-        
-                    // Sjekker kollidering i retning venstre
-                    playerY = parseInt($("#player").css("bottom"));
-                    asteroideY = parseInt($("#" + currentAsteroide).css("bottom"));
-                    
-                    if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY >= asteroideY &&  playerY < asteroideY + 50 || asteroideX >= playerX && asteroideX < playerX + 50 && asteroideY >= playerY && asteroideY < playerY + 50) 
-                    { 
-                        playerDead(); 
-                        return;
-                    }
-                }  
-                
+                        var currentAsteroide = asteroideListe[i].id;
+                        var elCurrentAsteroide = document.getElementById(currentAsteroide);  
+                        
+                        // Fjerner asteroide hvis den er utenfor venstre vindugrense
+                        if(parseInt($("#" + currentAsteroide).css("left")) < -50)
+                        {
+                            elCurrentAsteroide.remove();
+                            asteroideListe.splice(i,1);  
+                            //console.log("Slettet asteroide fra array.");
+                            continue;  
+                        }
+                        // Sjekker kollidering i retning opp
+                        
+                        var asteroideX = parseInt($("#" + currentAsteroide).css("left"));
+                        
+                        var asteroideY = parseInt($("#" + currentAsteroide).css("top"));
+                        
+                        if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY == asteroideY + 50 || playerX < asteroideX && playerX > asteroideX - 50 && playerY == asteroideY + 50)
+                        {
+                            playerDead();
+                            return; 
+                        }
+                        
+                        // Sjekker kollidering i retning ned
+                        playerY = parseInt($("#player").css("bottom"));
+                        asteroideY = parseInt($("#" + currentAsteroide).css("bottom"));
+                        
+                        if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY == asteroideY + 50 || playerX < asteroideX && playerX > asteroideX - 50 && playerY == asteroideY + 50)
+                        { 
+                            playerDead();
+                            return; 
+                        }
+            
+                        // Sjekker kollidering i retning høyre
+                        playerX = parseInt($("#player").css("right"));
+                        asteroideX = parseInt($("#" + currentAsteroide).css("right"));
+                        playerY = parseInt($("#player").css("top"));
+                        asteroideY = parseInt($("#" + currentAsteroide).css("top"));
+                        
+                        if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY >= asteroideY &&  playerY < asteroideY + 50 || asteroideX >= playerX && asteroideX < playerX + 50 && asteroideY >= playerY && asteroideY < playerY + 50) 
+                        { 
+                            playerDead();
+                            return;
+                        }
+            
+                        // Sjekker kollidering i retning venstre
+                        playerY = parseInt($("#player").css("bottom"));
+                        asteroideY = parseInt($("#" + currentAsteroide).css("bottom"));
+                        
+                        if(playerX >= asteroideX && playerX < asteroideX + 50 && playerY >= asteroideY &&  playerY < asteroideY + 50 || asteroideX >= playerX && asteroideX < playerX + 50 && asteroideY >= playerY && asteroideY < playerY + 50) 
+                        { 
+                            playerDead(); 
+                            return;
+                        }
+                    }  
+                }
             }
 
             
-
+            var sjekkSkuddKolTicks = 0;
             function sjekkSkuddKollidering(){
-                   for(var i = 0; i < skuddListe.length; i++)  
+                sjekkSkuddKolTicks++;
+                if(sjekkSkuddKolTicks >= 2)
+                {
+                    console.log("Kjører skuddkolsjekk");
+                    sjekkSkuddKolTicks = 0; 
+                    for(var i = 0; i < skuddListe.length; i++)  
                     {
-                        for(var j = 0; j < asteroideListe.length; j++)
-                        { 
-                            var skuddX = parseInt($(skuddListe[i]).css("right"));
-                            var asteroideX = parseInt($(asteroideListe[j]).css("right"));
-                            var skuddY = parseInt($(skuddListe[i]).css("top"));
-                            var asteroideY = parseInt($(asteroideListe[j]).css("top"));
+                        var skuddX = parseInt($(skuddListe[i]).css("right"));
+                        var skuddY = parseInt($(skuddListe[i]).css("top"));
+                        if(skuddX < -50)
+                        {
+                            var CurrentSkudd = skuddListe[i].id; 
+                            var elCurrentSkudd = document.getElementById(CurrentSkudd);
+                            skuddListe.splice(i,1);
+                            elCurrentSkudd.remove();
+                            return; 
+                        }
 
-                            if(skuddX < -50)
-                            {
-                                var CurrentSkudd = skuddListe[i].id; 
-                                var elCurrentSkudd = document.getElementById(CurrentSkudd);
-                                skuddListe.splice(i,1);
-                                elCurrentSkudd.remove();
-                                return; 
-                            }
+                        for(var j = 0; j < asteroideListe.length; j++)
+                        {   
+                            var asteroideX = parseInt($(asteroideListe[j]).css("right"));
+                            var asteroideY = parseInt($(asteroideListe[j]).css("top"));
 
                             if(skuddX >= asteroideX && skuddX < asteroideX + 50 && skuddY >= asteroideY &&  skuddY < asteroideY + 50 || asteroideX >= skuddX && asteroideX < skuddX + 10 && asteroideY >= skuddY && asteroideY < skuddY + 10) 
                             {   
@@ -404,6 +418,7 @@ $(document).ready(function() {
                             }
                         }
                     }  
+                }
             }
     
             var astSpawnSpeedup = 500; 

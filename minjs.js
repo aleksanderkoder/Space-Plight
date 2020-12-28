@@ -310,7 +310,7 @@ jQuery(function() {
             var sjekkKolTicks = 0; 
             function sjekkKollidering(){
                 sjekkKolTicks++;
-                if(sjekkKolTicks >= 5)
+                if(sjekkKolTicks >= 2)
                 {
                     console.log("Kjører sjekkKollidering");
                     sjekkKolTicks = 0; 
@@ -381,7 +381,7 @@ jQuery(function() {
             var sjekkSkuddKolTicks = 0;
             function sjekkSkuddKollidering(){
                 sjekkSkuddKolTicks++;
-                if(sjekkSkuddKolTicks >= 2)
+                if(sjekkSkuddKolTicks >= 1)
                 {
                     console.log("Kjører skuddkolsjekk");
                     sjekkSkuddKolTicks = 0; 
@@ -463,7 +463,6 @@ jQuery(function() {
             function skuddMomentum(){ 
                     for(i = 0; i < skuddListe.length; i++)
                     {
-                        console.log("skudd flyr");
                         var move = parseInt(skuddListe[i].style.left);
                         move = move + SKUDDFART;
                         skuddListe[i].style.left = move + "px";  

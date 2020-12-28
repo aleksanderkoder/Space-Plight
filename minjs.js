@@ -163,8 +163,10 @@ jQuery(function() {
             levelCounter();
             skuddMomentum();
             asteroideSpawner();
-    
+
+            
         }
+        
     }    
             
             window.addEventListener("keydown", (event) => {
@@ -474,6 +476,8 @@ jQuery(function() {
             }
 
             function playerDead(){
+                cancelAnimationFrame(gameLoop);
+
                 musikk.pause();
                 musikk.currentTime = 0;
                 var expSound = new Audio("Sound effects/Explosion in space.mp3");
@@ -484,7 +488,7 @@ jQuery(function() {
                 deathMusic.volume = masterVolume; 
                 deathMusic.play(); 
                 $("#game").hide(); 
-                cancelAnimationFrame(gameLoop);  
+                  
                 document.querySelectorAll('.asteroide').forEach(ast => ast.remove());
                 document.querySelectorAll('.skudd').forEach(sku => sku.remove());
                 asteroideListe = [];

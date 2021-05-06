@@ -56,6 +56,7 @@ body {
     height: 50px;
     position: absolute;
     animation: rotation 2s infinite linear;
+    border: 1px solid red; 
 }
 .skudd {
     width: 50px;

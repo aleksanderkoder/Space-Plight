@@ -335,7 +335,7 @@ jQuery(function() {
                         var spiller = document.getElementById("player");
 
                         if(isColliding(spiller, elCurrentAsteroide)) {
-                            alert("treff"); 
+                            playerDead();
                         }
 
                         // Fjerner asteroide hvis den er utenfor venstre vindugrense
